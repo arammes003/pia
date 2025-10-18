@@ -32,7 +32,7 @@ def mostrarDia(dia):
 # Funcion principal
 #   1. Pedimos dia
 #   2. Comprobamos que sea un dia valido
-#   3. Mostramoos el dia de la semana que es
+#   3. Mostramoos el dia de la semana que es 
 def main():
     dia = pedirDia()
     if dia is None:
