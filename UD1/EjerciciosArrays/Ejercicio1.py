@@ -1,4 +1,11 @@
-# 1. Define tres listas de 20 números enteros cada uno, con nombres number, square y cube. 
+"""
+    Program: Generate 3 list of 20 int numbers, with names number, square and cube.
+    Description:
+    Author: Alfonso Ramírez Mestanza
+    Date: 05/11/2025
+"""
+
+# 1. Define tres listas de 20 números enteros cada uno, con nombres number, square y cube.
 # Carga las lista number con valores aleatorios entre 0 y 100. 
 # En la lista square se deben almacenar los cuadrados de los valores que hay en number. 
 # En la lista cube se deben almacenar los cubos de los valores que hay en number. 
@@ -7,15 +14,22 @@
 import random
 import pandas as pd
 
-def define_list_number(cantity_numbers):
-    number = []
+MIN_RANDOM_NUMBER = 0
+MAX_RANDOM_NUMBER = 100
+NUMBERS_COUNT = 20
+START_COLUMN_NUMBER = 1
+END_COLUMN_NUMBER = 20 + 1
 
-    for _ in range(cantity_numbers):
-        number.append(random.randint(0, 100))
 
-    return number
+def generate_numbers(numbers_count):
+    numbers = []
 
-def define_square_list(numbers):
+    for _ in range(numbers_count):
+        numbers.append(random.randint(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER))
+
+    return numbers
+
+def generate_square_numbers(numbers):
     square_list = []
 
     for number in range(len(numbers)):
@@ -24,7 +38,7 @@ def define_square_list(numbers):
 
     return square_list
 
-def define_cube_list(numbers):
+def generate_cube_numbers(numbers):
     cube_list = []
 
     for number in range(len(numbers)):
@@ -35,17 +49,18 @@ def define_cube_list(numbers):
 
 
 def main():
-    numbers = define_list_number(20)
-    squares = define_square_list(numbers)
-    cubes = define_cube_list(numbers)
+    numbers = generate_numbers(NUMBERS_COUNT)
+    squares = generate_square_numbers(numbers)
+    cubes = generate_cube_numbers(numbers)
 
-    df = pd.DataFrame({
+    numbers_dataframe = pd.DataFrame({
         'Number': numbers,
         'Square': squares,
         'Cube': cubes
-    } , index=range(1, 21))
+    } , index=range(START_COLUMN_NUMBER, END_COLUMN_NUMBER))
 
-    print(df)
+    print(numbers_dataframe)
 
 
-main()
+if __name__ == "__main__":
+    main()

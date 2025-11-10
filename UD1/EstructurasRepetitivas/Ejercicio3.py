@@ -1,14 +1,25 @@
-# Crea una aplicación que permita adivinar un número. La aplicación genera un número aleatorio del 1 al 100. A continuación va pidiendo números y va respondiendo si el número a adivinar es mayor o menor que el introducido, además de los intentos que te quedan (tienes 10 intentos para acertarlo). El programa termina cuando se acierta el número (además te dice en cuantos intentos lo has acertado), si se llega al limite de intentos te muestra el número que había generado.
-
+"""
+    Program: Crea una aplicación que permita adivinar un número. La aplicación genera un número aleatorio del 1 al 100.
+    A continuación va pidiendo números y va respondiendo si el número a adivinar es mayor o menor que el introducido,
+    además de los intentos que te quedan (tienes 10 intentos para acertarlo). El programa termina cuando se acierta el número
+    (además te dice en cuantos intentos lo has acertado), si se llega al limite de intentos te muestra el número que había generado.
+    Author: Alfonso Ramírez Mestanza
+"""
 # Libreria que permite generar numeros aleatorios
 import random
 
+# CONST
+MIN_NUMBER = 1
+MAX_NUMBER = 100
+MAX_TRIES = 10
+ACTUAL_TRY = 0
+
 # Funcion que genera un numero aleatorio
-def generarNumeroRandom():
-    return random.randint(1, 100)
+def generate_random_number():
+    return random.randint(MIN_NUMBER, MAX_NUMBER)
 
 # Funcion que pide numeros
-def pedirNumero():
+def get_numbers():
     return int(input("Introduce un numero: "))
 
 
@@ -18,12 +29,12 @@ def pedirNumero():
 # - Avisa de los intentos restantes
 # - Avisa cuando aciertas
 # - Avisa en cuantos intentos has acertado
-def compararNumeros(numRandom):
-    numIntentos = 10
-    intentoActual = 0
+def compare_numbers(numRandom):
+    numIntentos = MAX_TRIES
+    intentoActual = ACTUAL_TRY
 
     while numIntentos >= 0:
-        numIntroducido = pedirNumero()
+        numIntroducido = get_numbers()
 
         if numIntroducido > numRandom:
             print("El numero introducido es mayor que el elegido.")
@@ -36,17 +47,22 @@ def compararNumeros(numRandom):
         
         numIntentos -= 1
         intentoActual += 1
-        print(f"Te quedan {numIntentos} intentos")
+
+        if numIntentos > 0:
+            print(f"Te quedan {numIntentos} intentos")
+
+        if numIntentos == 0:
+            print("Es tu ultimo intento, apunta bien...")
 
     print(f"Se acabaron los intentos. El numero elegido era {numRandom}")
-
 
 
 # Funcion principal
 def main():
     print("Tienes 10 intentos para adivinar el numero.")
-    compararNumeros(generarNumeroRandom())
+    compare_numbers(generate_random_number())
 
 
 # Llamada al ejercicio
-main()
+if __name__ == "__main__":
+    main()
